@@ -1,0 +1,12 @@
+body{
+    background-color: rgb(238, 234, 244);
+}
+
+#login-menu{
+    width: 30%;
+    height: 60%;
+    position: absolute;
+    background-color: black;
+    border-radius: 20px;
+    margin-left: auto;
+}
