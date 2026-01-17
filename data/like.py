@@ -1,6 +1,7 @@
-from database import db
+from data.database import db
 from datetime import datetime
 from sqlalchemy import *
+
 
 class Like(db.Model):
     """
@@ -8,6 +9,7 @@ class Like(db.Model):
     Requirement: User must be able to like a recipe
     """
     __tablename__ = 'likes'
+
     
     # Primary Key
     id = Column(Integer, primary_key=True)

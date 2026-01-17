@@ -1,4 +1,4 @@
-from database import db
+from data.database import db
 from datetime import datetime
 from sqlalchemy import *
 
