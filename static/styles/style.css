@@ -33,13 +33,15 @@ body{
 }
 
 #username{
+    margin-left: 10%;
     width: 80%;
-    height: 40%;
+    height: 50%;
 }
 
 #password{
+    margin-left: 10%;
     width: 80%;
-    height: 40%;
+    height: 50%;
 }
 
 #buttons{
