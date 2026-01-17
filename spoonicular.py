@@ -8,10 +8,4 @@ app = Flask(__name__)
 
 API_KEY = os.getenv("SPOONACULAR_API_KEY")
 
-@app.route('/home', methods=['GET'])
-def home():
-    render_template("recipes.html", recipes = [], search_query = "")
-
-
-def getURL(filter):
-    print()
+@app.route('/')
