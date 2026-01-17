@@ -4,6 +4,7 @@ from datetime import datetime
 from sqlalchemy import *
 from enum import Enum as PyEnum
 from enum import Enum
+import os
 
 db = SQLAlchemy()
 
@@ -54,8 +55,6 @@ class User(db.Model):
         self.password = password
         # self.role = role
 
-db = SQLAlchemy()
-
 def init_db(app):
 
     # Connect db to Flask app (reads DATABASE_URI from config)
@@ -82,7 +81,8 @@ def drop_all_tables(app):
         db.drop_all()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'users.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 init_db(app)
@@ -99,7 +99,7 @@ with app.app_context():
     if user:
         print(f"--- SUCCESS ---")
         print(f"Found User: {user.username}")
-        print(f"Role: {user.role.value}")
+        # print(f"Role: {user.role.value}")
         print(f"Password: {user.password}")
     else:
         print("User not found.")
