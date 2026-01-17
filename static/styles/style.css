@@ -2,7 +2,7 @@ body{
     background-color: rgb(202, 197, 210);
     background-image:url("../background.png");
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
 }
 
 #login-menu{
