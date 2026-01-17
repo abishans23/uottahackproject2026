@@ -30,10 +30,12 @@ body{
     width: 100%;
     display: grid;
     padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #username{
-    margin-left: 10%;
+    margin: auto;
     width: 80%;
     height: 60%;
     border-radius: 5px;
@@ -42,7 +44,7 @@ body{
 }
 
 #password{
-    margin-left: 10%;
+    margin: auto;
     width: 80%;
     height: 60%;
     border-radius: 5px;
@@ -51,15 +53,16 @@ body{
 }
 
 #buttons{
-    margin-top: 15px;
-    margin-bottom: 5px;
+    padding-top: 15px;
     height: 100%;
     width: 100%;
     display: grid;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #login{
-    margin-left: 10%;
+    margin: auto;
     width: 80%;
     height: 70%;
     border-radius: 10px;
@@ -70,7 +73,7 @@ body{
 }
 
 #register{
-    margin-left: 10%;
+    margin: auto;
     width: 80%;
     height: 70%;
     border-radius: 10px;
@@ -98,5 +101,5 @@ body{
 
 
 #info{
-    
+
 }
