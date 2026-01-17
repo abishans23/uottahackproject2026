@@ -32,10 +32,11 @@
         const selectedOption = document.getElementById("op");
         const btnSelect = document.getElementById("btn");
         const loader = document.getElementById("pender")
+        const val = selectedOption.value;
+
+        
 
        function changeFilter(){
-            const textInput = document.getElementById("text");
-            const val = selectedOption.value;
 
            
 
@@ -63,6 +64,8 @@
 
        function loadQuery(){
             loader.innerText = "Loading....."
+            const query = document.getElementById("text").trim();
+
        }
        changeFilter()
 
