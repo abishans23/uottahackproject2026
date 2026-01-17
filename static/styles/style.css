@@ -17,11 +17,13 @@ body{
 }
 
 #title-div{
-    padding-top: 10px;
-    height: 100%;
-    font-size: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: 80%;
+    font-size: 80px;
     text-align: center;
     color: black;
+    font-family: Snell Roundhand;
 }
 
 
@@ -70,6 +72,7 @@ body{
     background-color: #ab8cd8;
     border: 2px solid rgb(115, 105, 120);
     cursor: pointer;
+    font-weight: bold;
 }
 
 #register{
@@ -81,6 +84,8 @@ body{
     background-color: #ab8cd8;
     border: 2px solid rgb(115, 105, 120);
     cursor: pointer;
+    font-weight: bold;
+
 }
 
 #register:hover{
