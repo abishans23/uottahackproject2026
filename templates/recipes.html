@@ -19,11 +19,65 @@
         
         </select>
         <input type="text" placeholder="placeholder">
+
+            <option value="cuisine">find recipes for a specific cuisine</option>
+            <option value="diet">find recipes to help diet</option>
+            <option value="intolerance">find recipes with intolerances</option>
+            <option value="ingredient">find recipes from ingredients</option><!--search_recipes_by_ingredients-->
+        
+        </select>
+        <input id = "text" type="text" placeholder="" size = 60>
+
+        <button id = "btn" type = "button">Submit</button>
+        <h4 id = "pender"></h4>
         
 
         
     </div>
 
     <script></script>
+
+    <script>
+        const selectedOption = document.getElementById("op");
+        const btnSelect = document.getElementById("btn");
+        const loader = document.getElementById("pender")
+
+       function changeFilter(){
+            const textInput = document.getElementById("text");
+            const val = selectedOption.value;
+
+           
+
+            if(val === "ingredient"){
+                textInput.placeholder = "e.g  pickles, chocolate"
+            }
+
+            else if(val === "cuisine"){
+                textInput.placeholder = "e.g Italian or Mexican"
+            }
+
+            else if(val === "diet"){
+                textInput.placeholder = "e.g vegan or keto"
+            }
+
+            else if(val === "intolerance"){
+                textInput.placeholder = "e.g lactose or gluten"
+            }
+
+            else{
+                textInput.placeholder = "e.g  rice and curry or mango sticky rice"
+            }
+
+       }
+
+       function loadQuery(){
+            loader.innerText = "Loading....."
+       }
+       changeFilter()
+
+       selectedOption.addEventListener("change", changeFilter);
+       btnSelect.addEventListener("click", loadQuery);
+       
+    </script>
 </body>
 </html>
