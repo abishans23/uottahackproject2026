@@ -35,26 +35,68 @@ body{
 #username{
     margin-left: 10%;
     width: 80%;
-    height: 50%;
+    height: 60%;
     border-radius: 5px;
     border: 2px solid rgb(159, 144, 166);
+    background-color: rgb(235, 239, 239);
 }
 
 #password{
     margin-left: 10%;
     width: 80%;
-    height: 50%;
+    height: 60%;
     border-radius: 5px;
     border: 2px solid rgb(159, 144, 166);
-
+    background-color: rgb(235, 239, 239);
 }
 
 #buttons{
-    background-color: black;
+    margin-top: 15px;
+    margin-bottom: 5px;
     height: 100%;
     width: 100%;
+    display: grid;
 }
 
+#login{
+    margin-left: 10%;
+    width: 80%;
+    height: 70%;
+    border-radius: 10px;
+    color: rgb(228, 228, 228);
+    background-color: #ab8cd8;
+    border: 2px solid rgb(115, 105, 120);
+    cursor: pointer;
+}
+
+#register{
+    margin-left: 10%;
+    width: 80%;
+    height: 70%;
+    border-radius: 10px;
+    color: rgb(228, 228, 228);
+    background-color: #ab8cd8;
+    border: 2px solid rgb(115, 105, 120);
+    cursor: pointer;
+}
+
+#register:hover{
+    background-color: #9070b1;
+}
+
+#login:hover{
+    background-color: #9070b1;
+}
+
+#login:active{
+    background-color: #b8a4e5;
+}
+
+#register:active{
+    background-color: #b8a4e5;
+}
+
+
 #info{
-    background-color: brown;
+    
 }
