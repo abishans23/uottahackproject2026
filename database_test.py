@@ -21,18 +21,18 @@ with app.app_context():
     db.create_all()
 
     # Create dummy data
-    test_user = User(username="ChefTester", location="Ottawa", role=UserRole.CELEBRITY_CHEF)
+    test_user = User(username="Gordon Ramsay", location="London", role=UserRole.CELEBRITY_CHEF)
     db.session.add(test_user)
-    db.session.commit() # This saves it to the DB
+    db.session.commit() 
 
     # NOW you can query
-    user = User.query.get(1) 
+    user = User.query.filter_by(username="Gordon Ramsay",location="London").first()
     
     if user:
         print(f"--- SUCCESS ---")
         print(f"Found User: {user.username}")
         print(f"Role: {user.role.value}")
-        print(f"Auto-Cookbook Created: {user.cookbook}")
+        print(f"User in: {user.location}")
     else:
         print("User not found.")
 
