@@ -88,21 +88,20 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 init_db(app)
 
 with app.app_context():
-    # Create dummy data
-    test_user = User(username="Gordon Ramsay", password="password123", role=UserRole.CELEBRITY_CHEF)
-    db.session.add(test_user)
-    db.session.commit() 
+    user = User.query.filter_by(username="Gordon Vincent", password="password123").first()
 
-    # NOW you can query
-    user = User.query.filter_by(username="Gordon Ramsay", password="password123").first()
     
-    if user:
+    if not user:
+        # Create dummy data
+        test_user = User(username="Gordon Vincent", password="password123", role=UserRole.CELEBRITY_CHEF)
+        db.session.add(test_user)
+        db.session.commit() 
         print(f"--- SUCCESS ---")
-        print(f"Found User: {user.username}")
+        print(f"Found User: {test_user.username}")
         # print(f"Role: {user.role.value}")
-        print(f"Password: {user.password}")
+        print(f"Password: {test_user.password}")
     else:
-        print("User not found.")
+        print("User not found or already exists")
 
     # # Check if the cookbook was auto-created
     # retrieved_user = User.query.filter_by(username="ChefJoy").first()
