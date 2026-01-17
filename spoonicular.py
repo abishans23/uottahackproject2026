@@ -27,9 +27,25 @@ def search():
         url = BASE_URL + "findByIngredients"
     
     else:
+        url = BASE_URL + "complexSearch"
         if filter_type == "cuisine" :
             params["cuisine"] = query
         
         elif filter_type == "diet":
             params["diet"] = query
+
+        elif filter_type == "intolerance":
+            params["intolerance"] = query
+
+        else:
+            params["query"] = query
     
+
+        response = requests.get(url, params=params)
+        if response.status_code == 200:
+            return jsonify(response.json())
+        else:
+            return jsonify({"error": "API request failed"}), 500
+
+    if __name__ == "__main__":
+        app.run(debug=True)
