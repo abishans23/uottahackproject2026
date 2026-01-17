@@ -34,7 +34,13 @@
 
        function loadQuery(){
             loader.innerText = "Loading....."
-            const query = document.getElementById("text").trim();
+            const query = document.getElementById("txt");
+
+            try{
+                const f = 4/0
+            }catch(err){
+                loader.innerText = "Something went wrong"
+            }
 
        }
        changeFilter()
