@@ -2,15 +2,15 @@ body{
     background-color: rgb(202, 197, 210);
 }
 
+#page-container{
+    display: grid;
+    justify-items: center;
+}
+
 #searchMenu{
     width: 90%;
-    height: 5%;
-    position: absolute;
-    left: 50%;
-    top: 5%;
-    transform: translate(-50%, -50%);
-
-    border-radius: 20px;
+    height: 100%;
+    top: 10%;
     text-align: center;
     display: flex;
     flex-direction: row;
@@ -37,9 +37,38 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    background-color: rgb(238, 238, 238);
     opacity: 1;
     width: 3.5%;
     height: 100%;
     border-radius: 100%;
     border: 2px solid rgb(159, 144, 166);
+    cursor: pointer;
+}
+
+#recipe-holder{
+    margin-top: 25px;
+    height: 100%;
+    background-color: rgb(238, 238, 238);
+    display: grid;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 80%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+#btn:hover{
+    background-color: rgb(207, 212, 214);
+}
+
+#btn:active{
+    background-color: rgb(247, 247, 247);
+}
+
+#recipe-template {
+    overflow: hidden;
+    background-color: aqua;
 }
