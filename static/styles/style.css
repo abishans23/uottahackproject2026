@@ -26,22 +26,27 @@ body{
 
 
 #login-info{
-    background-color: aqua;
     height: 100%;
     width: 100%;
     display: grid;
+    padding-top: 10px;
 }
 
 #username{
     margin-left: 10%;
     width: 80%;
     height: 50%;
+    border-radius: 5px;
+    border: 2px solid rgb(159, 144, 166);
 }
 
 #password{
     margin-left: 10%;
     width: 80%;
     height: 50%;
+    border-radius: 5px;
+    border: 2px solid rgb(159, 144, 166);
+
 }
 
 #buttons{
