@@ -7,10 +7,11 @@ from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 import os
 
+
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///accounts.db'
-app.config['SECRET_KEY'] = 'database123'
+# bcrypt = Bcrypt(app)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///accounts.db'
+# app.config['SECRET_KEY'] = 'database123'
 
 db = SQLAlchemy()
 
@@ -41,6 +42,13 @@ def init_db(app):
         print("Database initialized successfully!")
         print(f"Database URI: {app.config.get('SQLALCHEMY_DATABASE_URI')}")
         print(f"Registered tables: {list(db.metadata.tables.keys())}")
+
+
+
+
+
+
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -87,16 +95,16 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
-                return redirect('/home')
+                return redirect('/loggedin')
     return render_template('index.html', form=form)
 
 @app.route('/search', methods=["GET", "POST"])
 def search():
     return
 
-@app.route('/home', methods=["GET", "POST"])
+@app.route('/loggedin', methods=["GET", "POST"])
 def home():
-    return render_template("home.html")
+    return render_template("loggedin.html")
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
