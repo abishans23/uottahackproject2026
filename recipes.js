@@ -3,6 +3,7 @@
         const btnSelect = document.getElementById("btn");
         const loader = document.getElementById("pender")
         const textInput = document.getElementById("txt");
+        const filterType = selectedOption.value;
 
         
 
@@ -32,14 +33,33 @@
 
        }
 
-       function loadQuery(){
+       async function loadQuery(){
             loader.innerText = "Loading....."
             const query = document.getElementById("txt");
 
             try{
-                const f = 4/0
+                const response = await fetch('/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        query: query,
+                        filter: filterType
+                    })
+                });
+
+                if(!response.ok){
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                loader.innerText = "";
+                displayRecipes(data, filterType);
+
             }catch(err){
-                loader.innerText = "Something went wrong"
+                loader.innerText = "Something went wrong: " + err.message;
+                console.error(err);
             }
 
        }

@@ -13,7 +13,7 @@ API_KEY = os.getenv("SPOONACULAR_API_KEY")
 def recipe():
     return render_template("recipes.html")
 
-@app.route('/search', ["POST"])
+@app.route('/search', methods=["POST"])
 def search():
     data = request.json
     query = data.get("query")
