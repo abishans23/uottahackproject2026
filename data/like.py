@@ -21,7 +21,7 @@ class Like(db.Model):
     
     # Ensure a user can only like a recipe once
     __table_args__ = (
-        db.UniqueConstraint('recipe_id', 'user_id', name='unique_user_recipe_like'),
+        UniqueConstraint('recipe_id', 'user_id', name='unique_user_recipe_like'),
     )
     
     def __init__(self, recipe_id, user_id):
