@@ -15,15 +15,42 @@
             <option value="recipes">find recipes</option><!--search_recipes-->
             <option value="ingredient">find recipes from ingredients</option><!--search_recipes_by_ingredients-->
             <option value="nutrient">find recipes from nutrients</option><!--search_recipes_by_nutrients-->
-            <option value="restaurants">find restaurants</option><!--search_restaurants-->
+            <option value="restaurant">find restaurants</option><!--search_restaurants-->
         
         </select>
-        <input type="text" placeholder="placeholder">
+        <input id = "text" type="text" placeholder="rice" size = 60>
         
 
         
     </div>
 
-    <script></script>
+    <script>
+        const selectedOption = document.getElementById("op");
+
+       function changeFilter(){
+            const textInput = document.getElementById("text");
+            const val = selectedOption.value;
+
+            if(val === "restaurant"){
+                textInput.placeholder = "e.g  No Forks Given or Penseum Restaurant"
+            }
+
+            else if(val === "ingredient"){
+                textInput.placeholder = "e.g  pickles, chocolate"
+            }
+
+            else if(val === "nutrient"){
+                textInput.placeholder = "e.g  carbohydrates, proteins"
+            }
+
+            else{
+                textInput.placeholder = "e.g  rice and curry or mango sticky rice"
+            }
+
+       }
+       changeFilter()
+
+       selectedOption.addEventListener("change", changeFilter);
+    </script>
 </body>
 </html>
