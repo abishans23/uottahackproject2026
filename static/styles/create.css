@@ -5,6 +5,7 @@ body{
 }
 
 #inside{
+    margin-top: 40px;
     display:grid;
     font-family:'Times New Roman';
     background-color: rgb(174, 132, 202);
