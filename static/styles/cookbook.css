@@ -8,16 +8,13 @@ body {
     justify-items: center;
 }
 
-#searchMenu {
-    width: 90%;
-    height: 60px; /* Defined height for the flex container */
+h1 {
+    color: #4b3f72; 
+    font-family: sans-serif;
     margin-top: 20px;
     text-align: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
 }
+
 
 #txt {
     border-radius: 20px;
