@@ -23,7 +23,7 @@ function displayRecipes(recipes) {
     cookbookShelf.innerHTML = '';
     
     if (recipes.length === 0) {
-        cookbookShelf.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; font-size: 18px;">No recipes yet. Create your first recipe!</p>';
+        cookbookShelf.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; font-size: 18px">No recipes yet. Create your first recipe!</p>';
         return;
     }
     
