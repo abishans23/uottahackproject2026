@@ -48,16 +48,16 @@ body{
 
 #recipe-holder{
     margin-top: 25px;
-    height: 100%;
-    background-color: rgb(238, 238, 238);
     display: grid;
-    row-gap: 10px;
-    column-gap: 10px;
+    overflow: scroll;
+    row-gap: 30px;
+    column-gap: 4%;
     grid-template-rows: auto auto auto;
     grid-template-columns: 1fr 1fr 1fr;
     width: 80%;
     height: 100%;
     border-radius: 15px;
+    padding: 10px;
 }
 
 #btn:hover{
@@ -70,5 +70,25 @@ body{
 
 #recipe-template {
     overflow: hidden;
-    background-color: aqua;
+    display: grid;
+    justify-items: center;
+    background-color: rgb(216, 211, 225);
+    border-radius: 15px;
+    padding: 5px;
+    grid-template-rows: 0.33fr 0.33fr 0.33fr;
+}
+
+#food-img{
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+#food-desc{
+    margin-top: 15px;
+    font-size: medium;
+    color: rgb(0, 0, 0);
+}
+
+#link{
+    font-size: medium;
 }
