@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 app = Flask(__name__)
-app.secret_key = 'your-secret-key-here-change-in-production'
+app.secret_key = 'secretkey'
 
 API_KEY = os.getenv("SPOONACULAR_API_KEY")
 DATABASE = 'users.db'
