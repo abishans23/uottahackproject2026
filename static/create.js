@@ -37,6 +37,7 @@ function saveInfo() {
     
     const ingredients = ingredientField.value.split(', ');
 
+
     const obj = {
         "name": nameField.value,
         "ingredients": ingredients,
