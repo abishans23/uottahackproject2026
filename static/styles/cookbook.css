@@ -1,6 +1,6 @@
 body {
     background-image: url('../background.png');
-    background-size:cover ;
+    background-size: cover;
     margin: 0;
 }
 
@@ -15,7 +15,6 @@ h1 {
     margin-top: 20px;
     text-align: center;
 }
-
 
 #txt {
     border-radius: 20px;
@@ -45,10 +44,14 @@ h1 {
     cursor: pointer;
 }
 
-#btn:hover { background-color: rgb(207, 212, 214); }
-#btn:active { background-color: rgb(247, 247, 247); }
+#btn:hover { 
+    background-color: rgb(207, 212, 214); 
+}
 
-/* Renamed from #recipe-holder */
+#btn:active { 
+    background-color: rgb(247, 247, 247); 
+}
+
 #cookbook-shelf {
     margin-top: 35px;
     display: grid;
@@ -61,7 +64,6 @@ h1 {
     padding: 10px;
 }
 
-/* Renamed from #recipe-template to class .cookbook-card */
 .cookbook-card {
     overflow: hidden;
     display: grid;
@@ -69,7 +71,7 @@ h1 {
     background-color: rgb(216, 211, 225);
     border-radius: 15px;
     padding: 5px;
-    grid-template-rows: 1fr 1fr 1fr; /* Cleaned up 0.33fr to 1fr */
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 .cookbook-card:hover {
@@ -79,7 +81,9 @@ h1 {
 .food-img {
     margin-top: 20px;
     border-radius: 15px;
-    max-width: 90%; /* Ensures image stays inside card */
+    max-width: 90%;
+    height: 200px;
+    object-fit: cover;
 }
 
 .food-desc {
@@ -94,4 +98,31 @@ h1 {
     font-size: medium;
     text-decoration: none;
     color: blue;
+}
+
+.view-btn, .delete-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.view-btn {
+    background-color: rgb(135, 89, 198);
+    color: white;
+}
+
+.view-btn:hover {
+    background-color: rgb(115, 69, 178);
+}
+
+.delete-btn {
+    background-color: rgb(200, 80, 80);
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: rgb(180, 60, 60);
 }

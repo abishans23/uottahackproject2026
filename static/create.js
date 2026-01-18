@@ -30,23 +30,69 @@ dropZone.addEventListener('drop', (e) => {
     }
 });
 
-function saveInfo() {
-    const nameField = document.getElementById("name");
+async function saveInfo() {
+    const nameField = document.getElementById("nameInput");
     const ingredientField = document.getElementById("ingredients");
     const instructionField = document.getElementById("instructions");
     
-    const ingredients = ingredientField.value.split(', ');
-
-
-    const obj = {
-        "name": nameField.value,
-        "ingredients": ingredients,
-        "instructions": instructionField.value,
-        "image": uploadedImage
+    // Validate inputs
+    if (!nameField.value.trim()) {
+        alert("Please enter a recipe name");
+        return;
     }
-
-    console.log(obj);
-    return obj;
+    
+    if (!ingredientField.value.trim()) {
+        alert("Please enter ingredients");
+        return;
+    }
+    
+    if (!instructionField.value.trim()) {
+        alert("Please enter instructions");
+        return;
+    }
+    
+    // Create FormData to send file and text data
+    const formData = new FormData();
+    formData.append('name', nameField.value);
+    formData.append('ingredients', ingredientField.value);
+    formData.append('instructions', instructionField.value);
+    
+    if (uploadedImage) {
+        formData.append('image', uploadedImage);
+    }
+    
+    try {
+        // Show loading state
+        selButton.disabled = true;
+        selButton.textContent = "Saving...";
+        
+        const response = await fetch('/save-recipe', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok && data.success) {
+            alert("Recipe saved successfully!");
+            
+            nameField.value = '';
+            ingredientField.value = '';
+            instructionField.value = '';
+            uploadedImage = null;
+            dropZone.innerHTML = 'Drag and drop an image here';
+            
+            window.location.href = '/library';
+        } else {
+            alert("Error saving recipe: " + (data.error || "Unknown error"));
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Error saving recipe: " + error.message);
+    } finally {
+        selButton.disabled = false;
+        selButton.textContent = "Submit";
+    }
 }
 
 selButton.addEventListener("click", saveInfo);
