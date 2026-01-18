@@ -1,0 +1,96 @@
+body {
+    background-color: rgb(202, 197, 210);
+    margin: 0;
+}
+
+#page-container {
+    display: grid;
+    justify-items: center;
+}
+
+h1 {
+    color: #4b3f72; 
+    font-family: sans-serif;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+#txt {
+    border-radius: 20px;
+    border: 2px solid rgb(159, 144, 166);
+    flex-basis: 70%;
+    height: 80%;
+    padding-left: 15px;
+}
+
+#op {
+    cursor: pointer;
+    border-radius: 25px;
+    border: 2px solid rgb(159, 144, 166);
+    height: 80%;
+}
+
+#btn {
+    background-image: url("../search.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgb(238, 238, 238);
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border: 2px solid rgb(159, 144, 166);
+    cursor: pointer;
+}
+
+#btn:hover { background-color: rgb(207, 212, 214); }
+#btn:active { background-color: rgb(247, 247, 247); }
+
+/* Renamed from #recipe-holder */
+#cookbook-shelf {
+    margin-top: 35px;
+    display: grid;
+    overflow-y: auto;
+    row-gap: 30px;
+    column-gap: 4%;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 80%;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+/* Renamed from #recipe-template to class .cookbook-card */
+.cookbook-card {
+    overflow: hidden;
+    display: grid;
+    justify-items: center;
+    background-color: rgb(216, 211, 225);
+    border-radius: 15px;
+    padding: 5px;
+    grid-template-rows: 1fr 1fr 1fr; /* Cleaned up 0.33fr to 1fr */
+}
+
+.cookbook-card:hover {
+    background-color: rgb(185, 177, 193);
+}
+
+.food-img {
+    margin-top: 20px;
+    border-radius: 15px;
+    max-width: 90%; /* Ensures image stays inside card */
+}
+
+.food-desc {
+    margin-top: 25px;
+    padding: 0 20px;
+    font-size: medium;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.link {
+    font-size: medium;
+    text-decoration: none;
+    color: blue;
+}
