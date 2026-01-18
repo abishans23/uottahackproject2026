@@ -144,6 +144,7 @@ def delete_recipe(recipe_id, user_id):
         conn.close()
         return False
 
+# Login required decorator
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -273,6 +274,7 @@ def save_recipe_route():
         if not user_id:
             return jsonify({"error": "User not found"}), 404
         
+        # Handle image upload
         image_path = None
         if 'image' in request.files:
             file = request.files['image']
@@ -281,6 +283,7 @@ def save_recipe_route():
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 image_path = filename
         
+        # Save recipe to database
         if save_recipe(user_id, name, ingredients, instructions, image_path):
             return jsonify({"success": True, "message": "Recipe saved successfully!"})
         else:
@@ -296,6 +299,7 @@ def library():
     user_id = get_user_id(session['user'])
     recipes = get_user_recipes(user_id)
     
+    # Convert recipes to list of dicts
     recipes_list = []
     for recipe in recipes:
         recipes_list.append({
@@ -316,6 +320,7 @@ def get_recipes():
         user_id = get_user_id(session['user'])
         recipes = get_user_recipes(user_id)
         
+        # Convert recipes to list of dicts
         recipes_list = []
         for recipe in recipes:
             recipes_list.append({
@@ -343,6 +348,37 @@ def delete_recipe_route(recipe_id):
             return jsonify({"error": "Failed to delete recipe"}), 500
     except Exception as e:
         print(f"Error deleting recipe: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/like-recipe', methods=["POST"])
+@login_required
+def like_recipe():
+    try:
+        data = request.json
+        title = data.get('title')
+        image_url = data.get('image')
+        recipe_link = data.get('link')
+        
+        if not title:
+            return jsonify({"error": "Recipe title is required"}), 400
+        
+        user_id = get_user_id(session['user'])
+        if not user_id:
+            return jsonify({"error": "User not found"}), 404
+        
+        # Save with null ingredients/instructions and store the external image URL
+        # We'll store the link in the instructions field temporarily
+        ingredients = "From Spoonacular - see link for details"
+        instructions = f"View full recipe at: {recipe_link}" if recipe_link else "External recipe"
+        
+        # Store the image URL directly (external URL)
+        if save_recipe(user_id, title, ingredients, instructions, image_url):
+            return jsonify({"success": True, "message": "Recipe saved to your cookbook!"})
+        else:
+            return jsonify({"error": "Failed to save recipe"}), 500
+            
+    except Exception as e:
+        print(f"Error in like_recipe: {e}")
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':

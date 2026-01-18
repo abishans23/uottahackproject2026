@@ -59,6 +59,33 @@ async function loadQuery(){
     }
 }
 
+async function like(title, image, link){
+    try {
+        const response = await fetch('/like-recipe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: title,
+                image: image,
+                link: link
+            })
+        });
+
+        const data = await response.json();
+
+        if(response.ok && data.success){
+            alert("Recipe saved to your cookbook!");
+        } else {
+            alert("Error saving recipe: " + (data.error || "Unknown error"));
+        }
+    } catch(err) {
+        console.error("Error liking recipe:", err);
+        alert("Error saving recipe: " + err.message);
+    }
+}
+
 function displayRecipes(data, filterType){
     const recipeHolder = document.getElementById("recipe-holder");
     recipeHolder.innerHTML = "";
@@ -76,11 +103,15 @@ function displayRecipes(data, filterType){
         const title = recipe.title;
         const image = recipe.image;
         const id = recipe.id;
+        const link = `https://spoonacular.com/recipes/${title.replace(/\s+/g, '-').toLowerCase()}-${id}`;
         
         recipeCard.innerHTML = `
-            <img id="food-img" src="${image}">\n
-            <div id="food-desc">${title}</div>\n
-            <a href="https://spoonacular.com/recipes/${title.replace(/\s+/g, '-').toLowerCase()}-${id}" target="_blank" id="link">View Recipe</a>
+            <img id="food-img" src="${image}">
+            <div id="food-desc">${title}</div>
+            <button onclick='like(${JSON.stringify(title)}, ${JSON.stringify(image)}, ${JSON.stringify(link)})' style="background-color: rgb(135, 89, 198); color: white; padding: 8px 16px; border: none; border-radius: 8px; cursor: pointer; margin: 5px;">
+                Save to Cookbook
+            </button>
+            <a href="${link}" target="_blank" id="link">View Recipe</a>
         `;
         
         recipeHolder.appendChild(recipeCard);

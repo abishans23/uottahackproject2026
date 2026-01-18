@@ -37,9 +37,16 @@ function createRecipeCard(recipe) {
     const card = document.createElement('div');
     card.className = 'cookbook-card';
     
-    const imageSrc = recipe.image_path 
-        ? `/static/uploads/${recipe.image_path}` 
-        : 'https://via.placeholder.com/300x200?text=No+Image';
+    let imageSrc;
+    if (recipe.image_path) {
+        if (recipe.image_path.startsWith('http')) {
+            imageSrc = recipe.image_path;
+        } else {
+            imageSrc = `/static/uploads/${recipe.image_path}`;
+        }
+    } else {
+        imageSrc = 'https://via.placeholder.com/300x200?text=No+Image';
+    }
     
     card.innerHTML = `
         <img src="${imageSrc}" class="food-img" alt="${recipe.name}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
