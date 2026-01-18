@@ -171,10 +171,15 @@ def search():
         print(f"ERROR: {e}")  
         return jsonify({"error": str(e)}), 500
 
+@app.route('/create', methods=["GET", "POST"])
+@login_required
+def create():
+    return render_template("createRecipe.html")
+
 @app.route('/library', methods=["GET", "POST"])
 @login_required
 def library():
-    return render_template("library.html")
+    return render_template("myCookBook.html")
 
 if __name__ == '__main__':
     init_db()
