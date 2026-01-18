@@ -66,8 +66,8 @@ body{
     padding-right: 5px;
 }
 
-#login{
-    margin: auto;
+#login {
+    margin-left: 10%;
     width: 80%;
     height: 70%;
     border-radius: 10px;
