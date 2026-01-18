@@ -1,123 +1,127 @@
-from flask import Flask, render_template, url_for, redirect
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
-from flask_bcrypt import Bcrypt
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+from werkzeug.security import generate_password_hash, check_password_hash
+from functools import wraps
+import sqlite3
 import os
 
-
 app = Flask(__name__)
-# bcrypt = Bcrypt(app)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///accounts.db'
-# app.config['SECRET_KEY'] = 'database123'
+app.secret_key = 'your-secret-key-here-change-in-production'
 
-db = SQLAlchemy()
+DATABASE = 'users.db'
 
-def init_db(app):
-   
-    # Connect db to Flask app (reads DATABASE_URI from config)
-    db.init_app(app)
+# Initialize database
+def init_db():
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
     
-    # Import all models to register them with SQLAlchemy
-    # This MUST happen AFTER db.init_app() but BEFORE db.create_all()
-    with app.app_context():
-        class User(db.Model, UserMixin):
-            __tablename__ = "accounts"
-            id = db.Column(db.Integer, primary_key=True)
-            username = db.Column(db.String(20), nullable=False, unique=True)
-            password = db.Column(db.String(80), nullable=False)
+    # Create demo user if it doesn't exist
+    cursor.execute('SELECT username FROM users WHERE username = ?', ('demo',))
+    if not cursor.fetchone():
+        hashed_password = generate_password_hash('password123')
+        cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', 
+                      ('demo', hashed_password))
+    
+    conn.commit()
+    conn.close()
 
-            def __init__(self, id, username, password):
-                self.id = id
-                self.username = username
-                self.password = password
-        
-        # Create all tables in the database
-        # This looks at all classes that inherit from db.Model
-        # and creates their corresponding database tables
-        db.create_all()
-        
-        print("Database initialized successfully!")
-        print(f"Database URI: {app.config.get('SQLALCHEMY_DATABASE_URI')}")
-        print(f"Registered tables: {list(db.metadata.tables.keys())}")
+# Database helper functions
+def get_db_connection():
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row
+    return conn
 
+def get_user(username):
+    conn = get_db_connection()
+    user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+    conn.close()
+    return user
 
+def create_user(username, password):
+    conn = get_db_connection()
+    hashed_password = generate_password_hash(password)
+    try:
+        conn.execute('INSERT INTO users (username, password) VALUES (?, ?)', 
+                    (username, hashed_password))
+        conn.commit()
+        conn.close()
+        return True
+    except sqlite3.IntegrityError:
+        conn.close()
+        return False
 
+# Login required decorator
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user' not in session:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
 
+@app.route('/')
+def index():
+    if 'user' in session:
+        return redirect(url_for('dashboard'))
+    return redirect(url_for('login'))
 
-
-
-
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-
-class RegisterForm(FlaskForm):
-    username = StringField(validators=[
-                           InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
-
-    password = PasswordField(validators=[
-                             InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
-
-    submit = SubmitField('Register')
-
-    def validate_username(self, username):
-        existing_user_username = User.query.filter_by(
-            username=username.data).first()
-        
-        if existing_user_username:
-            raise ValidationError(
-                'That username already exists. Please choose a different one.')
-
-class LoginForm(FlaskForm):
-    username = StringField(validators=[
-                           InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
-
-    password = PasswordField(validators=[
-                             InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
-
-    submit = SubmitField('Login')
-
-
-API_KEY = os.getenv("API_KEY")
-
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user:
-            if bcrypt.check_password_hash(user.password, form.password.data):
-                login_user(user)
-                return redirect('/loggedin')
-    return render_template('index.html', form=form)
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        
+        user = get_user(username)
+        
+        if user and check_password_hash(user['password'], password):
+            session['user'] = username
+            flash('Login successful!', 'success')
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Invalid username or password', 'error')
+    
+    return render_template('login.html')
 
-@app.route('/search', methods=["GET", "POST"])
-def search():
-    return
-
-@app.route('/loggedin', methods=["GET", "POST"])
-def home():
-    return render_template("loggedin.html")
-
-@app.route('/register', methods=["GET", "POST"])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm()
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
+        
+        if password != confirm_password:
+            flash('Passwords do not match', 'error')
+        elif len(password) < 6:
+            flash('Password must be at least 6 characters', 'error')
+        elif len(username) < 3:
+            flash('Username must be at least 3 characters', 'error')
+        else:
+            if create_user(username, password):
+                flash('Registration successful! Please login.', 'success')
+                return redirect(url_for('login'))
+            else:
+                flash('Username already taken', 'error')
+    
+    return render_template('register.html')
 
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data)
-        new_user = User(username=form.username.data, password=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect('/')
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    return render_template('dashboard.html', user=session['user'])
 
-    return render_template('register.html', form=form)
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    flash('You have been logged out', 'success')
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port="8000")
+    init_db()
+    app.run(debug=True, host="0.0.0.0", port="5500")

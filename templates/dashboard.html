@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register</title>
+    <title>Dashboard</title>
     <style>
       * {
         margin: 0;
@@ -28,7 +28,7 @@
         border-radius: 12px;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         width: 100%;
-        max-width: 400px;
+        max-width: 600px;
         padding: 40px;
       }
 
@@ -38,36 +38,34 @@
         font-size: 28px;
       }
 
-      .subtitle {
+      .welcome-text {
         color: #666;
         margin-bottom: 30px;
-        font-size: 14px;
+        font-size: 16px;
       }
 
-      .form-group {
-        margin-bottom: 20px;
+      .user-email {
+        color: #667eea;
+        font-weight: 600;
       }
 
-      label {
-        display: block;
-        margin-bottom: 8px;
-        color: #333;
-        font-weight: 500;
-        font-size: 14px;
-      }
-
-      input {
-        width: 100%;
-        padding: 12px 15px;
-        border: 2px solid #e0e0e0;
+      .dashboard-content {
+        background: #f8f9fa;
         border-radius: 8px;
-        font-size: 14px;
-        transition: border-color 0.3s;
+        padding: 30px;
+        margin-bottom: 20px;
+        text-align: center;
       }
 
-      input:focus {
-        outline: none;
-        border-color: #667eea;
+      .dashboard-content h2 {
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 22px;
+      }
+
+      .dashboard-content p {
+        color: #666;
+        line-height: 1.6;
       }
 
       .btn {
@@ -83,6 +81,9 @@
         transition:
           transform 0.2s,
           box-shadow 0.2s;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
       }
 
       .btn:hover {
@@ -110,35 +111,14 @@
         color: #155724;
         border: 1px solid #c3e6cb;
       }
-
-      .alert-error {
-        background-color: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-      }
-
-      .footer-text {
-        text-align: center;
-        margin-top: 20px;
-        color: #666;
-        font-size: 14px;
-      }
-
-      .footer-text a {
-        color: #667eea;
-        text-decoration: none;
-        font-weight: 600;
-      }
-
-      .footer-text a:hover {
-        text-decoration: underline;
-      }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Create Account</h1>
-      <p class="subtitle">Register for a new account</p>
+      <h1>Dashboard</h1>
+      <p class="welcome-text">
+        Welcome, <span class="user-email">{{ user }}</span>!
+      </p>
 
       {% with messages = get_flashed_messages(with_categories=true) %} {% if
       messages %}
@@ -149,46 +129,15 @@
       </div>
       {% endif %} {% endwith %}
 
-      <form method="POST" action="{{ url_for('register') }}">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            required
-            minlength="3"
-          />
-        </div>
+      <div class="dashboard-content">
+        <h2>You're logged in!</h2>
+        <p>
+          This is a protected page that only authenticated users can access. You
+          can now build out your application's features here.
+        </p>
+      </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            minlength="6"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="confirm_password">Confirm Password</label>
-          <input
-            type="password"
-            id="confirm_password"
-            name="confirm_password"
-            required
-            minlength="6"
-          />
-        </div>
-
-        <button type="submit" class="btn">Register</button>
-      </form>
-
-      <p class="footer-text">
-        Already have an account? <a href="{{ url_for('login') }}">Login here</a>
-      </p>
+      <a href="{{ url_for('logout') }}" class="btn">Logout</a>
     </div>
   </body>
 </html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register</title>
+    <title>Login</title>
     <style>
       * {
         margin: 0;
@@ -133,12 +133,28 @@
       .footer-text a:hover {
         text-decoration: underline;
       }
+
+      .demo-info {
+        background-color: #e7f3ff;
+        border: 1px solid #b3d9ff;
+        color: #004085;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 13px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Create Account</h1>
-      <p class="subtitle">Register for a new account</p>
+      <h1>Welcome Back</h1>
+      <p class="subtitle">Login to your account</p>
+
+      <div class="demo-info">
+        <strong>Demo account:</strong><br />
+        Username: demo<br />
+        Password: password123
+      </div>
 
       {% with messages = get_flashed_messages(with_categories=true) %} {% if
       messages %}
@@ -149,45 +165,23 @@
       </div>
       {% endif %} {% endwith %}
 
-      <form method="POST" action="{{ url_for('register') }}">
+      <form method="POST" action="{{ url_for('login') }}">
         <div class="form-group">
           <label for="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            required
-            minlength="3"
-          />
+          <input type="text" id="username" name="username" required />
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            minlength="6"
-          />
+          <input type="password" id="password" name="password" required />
         </div>
 
-        <div class="form-group">
-          <label for="confirm_password">Confirm Password</label>
-          <input
-            type="password"
-            id="confirm_password"
-            name="confirm_password"
-            required
-            minlength="6"
-          />
-        </div>
-
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn">Login</button>
       </form>
 
       <p class="footer-text">
-        Already have an account? <a href="{{ url_for('login') }}">Login here</a>
+        Don't have an account?
+        <a href="{{ url_for('register') }}">Register here</a>
       </p>
     </div>
   </body>
