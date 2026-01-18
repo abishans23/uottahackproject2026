@@ -1,12 +1,16 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 import sqlite3
 import os
+import requests
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here-change-in-production'
 
+API_KEY = os.getenv("SPOONACULAR_API_KEY")
 DATABASE = 'users.db'
 
 # Initialize database
@@ -69,7 +73,7 @@ def login_required(f):
 @app.route('/')
 def index():
     if 'user' in session:
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('search'))
     return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -83,7 +87,7 @@ def login():
         if user and check_password_hash(user['password'], password):
             session['user'] = username
             flash('Login successful!', 'success')
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('search'))
         else:
             flash('Invalid username or password', 'error')
     
@@ -124,4 +128,4 @@ def logout():
 
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True, host="0.0.0.0", port="5500")
+    app.run(debug=True, host="0.0.0.0", port="5000")
