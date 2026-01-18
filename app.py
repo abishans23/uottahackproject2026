@@ -172,6 +172,7 @@ def search():
         return jsonify({"error": str(e)}), 500
 
 @app.route('/library', methods=["GET", "POST"])
+@login_required
 def library():
     return render_template("library.html")
 
