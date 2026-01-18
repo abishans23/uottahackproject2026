@@ -1,0 +1,94 @@
+body{
+    background-color: rgb(202, 197, 210);
+}
+
+#page-container{
+    display: grid;
+    justify-items: center;
+}
+
+#searchMenu{
+    width: 90%;
+    height: 100%;
+    top: 10%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#txt{
+    border-radius: 20px;
+    border: 2px solid rgb(159, 144, 166);
+    flex-basis: 70%;
+    height: 80%;
+}
+
+#op{
+    cursor: pointer;
+    border-radius: 25px;
+    border: 2px solid rgb(159, 144, 166);
+    height: 80%;
+}
+
+#btn{
+    background-image: url("../search.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgb(238, 238, 238);
+    opacity: 1;
+    width: 3.5%;
+    height: 100%;
+    border-radius: 100%;
+    border: 2px solid rgb(159, 144, 166);
+    cursor: pointer;
+}
+
+#recipe-holder{
+    margin-top: 25px;
+    display: grid;
+    overflow: scroll;
+    row-gap: 30px;
+    column-gap: 4%;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 80%;
+    height: 100%;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+#btn:hover{
+    background-color: rgb(207, 212, 214);
+}
+
+#btn:active{
+    background-color: rgb(247, 247, 247);
+}
+
+#recipe-template {
+    overflow: hidden;
+    display: grid;
+    justify-items: center;
+    background-color: rgb(216, 211, 225);
+    border-radius: 15px;
+    padding: 5px;
+    grid-template-rows: 0.33fr 0.33fr 0.33fr;
+}
+
+#food-img{
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+#food-desc{
+    margin-top: 15px;
+    font-size: medium;
+    color: rgb(0, 0, 0);
+}
+
+#link{
+    font-size: medium;
+}
