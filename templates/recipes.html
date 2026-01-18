@@ -1,93 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recipes</title>
-    <link rel = "stylesheet" href = "../static/styles/recipes.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../static/styles/recipes.css" />
+  </head>
+  <body>
     <navbar>
-        <div>
-            <h1>Yumly</h1>
-        </div>
-        <div>
-            <button id="library" type="button"><a href="{{ url_for('library') }}">Library</a></button>
-            <button id="logout" type="button"><a href="{{ url_for('logout') }}">Log Out</a></button>
-        </div>
+      <div>
+        <h1>Yumly</h1>
+      </div>
+      <div>
+        <button id="library" type="button">
+          <a href="{{ url_for('library') }}">Library</a>
+        </button>
+        <button id="logout" type="button">
+          <a href="{{ url_for('logout') }}">Log Out</a>
+        </button>
+      </div>
     </navbar>
     <div id="page-container">
-        
-        <div id="searchMenu">
+      <div id="searchMenu">
+        <select name="options" id="op">
+          <option value="recipes">No Filter</option>
+          <!--search_recipes-->
+          <option value="cuisine">find recipes for a specific cuisine</option>
+          <option value="diet">find recipes to help diet</option>
+          <option value="intolerance">find recipes with intolerances</option>
+          <option value="ingredient">find recipes from ingredients</option>
+          <!--search_recipes_by_ingredients-->
+        </select>
+        <input id="txt" type="text" placeholder="" size="60" />
 
-            <select name="options" id="op">
-                <option value="recipes">No Filter</option><!--search_recipes-->
-                <option value="cuisine">find recipes for a specific cuisine</option>
-                <option value="diet">find recipes to help diet</option>
-                <option value="intolerance">find recipes with intolerances</option>
-                <option value="ingredient">find recipes from ingredients</option><!--search_recipes_by_ingredients-->
-            
-            </select>
-            <input id = "txt" type="text" placeholder="" size = 60>
+        <button id="btn" type="button"></button>
+        <h4 id="pender"></h4>
+      </div>
 
-            <button id = "btn" type = "button"></button>
-            <h4 id = "pender"></h4>
-            
-        </div>
-
-        <div id="recipe-holder">
-            <div id="recipe-template">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFGvR1LiWD8XMLY8pzD79L-loB_OYjn9733A&s" id="food-img">
-                <div id="food-desc">desc</div>
-                <a href="url" id="link">link</a>
-            </div>   
-            
-            <div id="recipe-template">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFGvR1LiWD8XMLY8pzD79L-loB_OYjn9733A&s" id="food-img">
-                <div id="food-desc">desc</div>
-                <a href="url" id="link">link</a>
-            </div>           
-
-            <div id="recipe-template">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFGvR1LiWD8XMLY8pzD79L-loB_OYjn9733A&s" id="food-img">
-                <div id="food-desc">desc</div>
-                <a href="url" id="link">link</a>
-            </div>   
-            
-                        <div id="recipe-template">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFGvR1LiWD8XMLY8pzD79L-loB_OYjn9733A&s" id="food-img">
-                <div id="food-desc">desc</div>
-                <a href="url" id="link">link</a>
-            </div>   
-            
-            <div id="recipe-template">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFGvR1LiWD8XMLY8pzD79L-loB_OYjn9733A&s" id="food-img">
-                <div id="food-desc">desc</div>
-                <a href="url" id="link">link</a>
-            </div>           
-
-            <div id="recipe-template">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFGvR1LiWD8XMLY8pzD79L-loB_OYjn9733A&s" id="food-img">
-                <div id="food-desc">desc</div>
-                <a href="url" id="link">link</a>
-            </div>  
-
-                        <div id="recipe-template">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFGvR1LiWD8XMLY8pzD79L-loB_OYjn9733A&s" id="food-img">
-                <div id="food-desc">desc</div>
-                <a href="url" id="link">link</a>
-            </div>  
-                        <div id="recipe-template">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFGvR1LiWD8XMLY8pzD79L-loB_OYjn9733A&s" id="food-img">
-                <div id="food-desc">desc</div>
-                <a href="url" id="link">link</a>
-            </div>  
-
-
-
+      <div id="recipe-holder"></div>
     </div>
 
-    <script src = "../static/recipes.js"></script>
-
-</body>
+    <script src="../static/recipes.js"></script>
+  </body>
 </html>

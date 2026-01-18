@@ -91,4 +91,3 @@ changeFilter()
 
 selectedOption.addEventListener("change", changeFilter);
 btnSelect.addEventListener("click", loadQuery);
-btnLibrary.addEventListener("click", loadLibrary)
