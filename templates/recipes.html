@@ -7,7 +7,15 @@
     <link rel = "stylesheet" href = "../static/styles/recipes.css">
 </head>
 <body>
-
+    <navbar>
+        <div>
+            <h1>Yumly</h1>
+        </div>
+        <div>
+            <button id="library" type="button"><a href="{{ url_for('library') }}">Library</a></button>
+            <button id="logout" type="button"><a href="{{ url_for('logout') }}">Log Out</a></button>
+        </div>
+    </navbar>
     <div id="page-container">
         
         <div id="searchMenu">

@@ -171,6 +171,10 @@ def search():
         print(f"ERROR: {e}")  
         return jsonify({"error": str(e)}), 500
 
+@app.route('/library', methods=["GET", "POST"])
+def library():
+    return render_template("library.html")
+
 if __name__ == '__main__':
     init_db()
     app.run(debug=True, host="0.0.0.0", port="5000")

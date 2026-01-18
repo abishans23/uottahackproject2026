@@ -1,5 +1,14 @@
-body{
-    background-color: rgb(202, 197, 210);
+body {
+    /* background-color: rgb(202, 197, 210); */
+    background-image: url("../background.png");
+    background-size: cover;
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+}
+
+navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #page-container{
