@@ -47,7 +47,7 @@ body{
 }
 
 #recipe-holder{
-    margin-top: 25px;
+    margin-top: 35px;
     display: grid;
     overflow: scroll;
     row-gap: 30px;
@@ -78,14 +78,22 @@ body{
     grid-template-rows: 0.33fr 0.33fr 0.33fr;
 }
 
+#recipe-template:hover{
+    background-color: rgb(185, 177, 193);
+}
+
 #food-img{
-    margin-top: 10px;
-    border-radius: 10px;
+    margin-top: 20px;
+    border-radius: 15px;
+
 }
 
 #food-desc{
-    margin-top: 15px;
+    margin-top: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
     font-size: medium;
+    margin-bottom: 10px;
     color: rgb(0, 0, 0);
 }
 

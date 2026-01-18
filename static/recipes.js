@@ -72,16 +72,15 @@ function displayRecipes(data, filterType){
 
     recipes.forEach(recipe => {
         const recipeCard = document.createElement('div');
-        recipeCard.className = 'recipe-card';
-        
+        recipeCard.id = "recipe-template";        
         const title = recipe.title;
         const image = recipe.image;
         const id = recipe.id;
         
         recipeCard.innerHTML = `
-            <img src="${image}" alt="${title}">
-            <h3>${title}</h3>
-            <a href="https://spoonacular.com/recipes/${title.replace(/\s+/g, '-').toLowerCase()}-${id}" target="_blank">View Recipe</a>
+            <img id="food-img" src="${image}">\n
+            <div id="food-desc">${title}</div>\n
+            <a href="https://spoonacular.com/recipes/${title.replace(/\s+/g, '-').toLowerCase()}-${id}" target="_blank" id="link">View Recipe</a>
         `;
         
         recipeHolder.appendChild(recipeCard);
