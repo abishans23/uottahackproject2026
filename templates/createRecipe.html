@@ -7,8 +7,34 @@
     <title>Create</title>
 </head>
 <body>
-    <div id="body">
+    <div id="inside">
+        <h1>Create Recipe</h1>
+        <div id="name">
+            <h4>Name of the Recipe</h4>
+            <input id = "nameInput">
+        </div>
+        
+        <div id = "ing">
+            <h4>Ingredients</h4>
+            <input id = "ingredients">
+        </div>
+        
+        <div id="ins">
+            <h4>Instructions</h4>
+            <textarea id = "instructions"></textarea>
+        </div>
+        
 
+
+        <div id="dropZone" style="border: 2px dashed #ccc; padding: 20px;">
+            Drag and drop an image here
+        </div>
+
+        <button id = "btn" type = "button" >Submit</button>
+
+
+        
     </div>
+    <script src = "../static/create.js"></script>
 </body>
 </html>

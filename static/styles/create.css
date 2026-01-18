@@ -1,7 +1,59 @@
 body{
-    background-color: rgb(202, 197, 210);
+    background-image: url('../background.png');
+    background-size: cover;
+    justify-items: center;
 }
 
-#body{
-    
+#inside{
+    display:grid;
+    font-family:'Times New Roman';
+    background-color: rgb(174, 132, 202);
+    height: 90%;
+    width: 40%;
+    border-radius: 30px;
+    grid-template-rows: 1fr 1fr 1fr 2fr 1fr 1fr;
+    justify-items: center;
+    overflow: hidden;
+}
+
+#name{
+    width:90%;
+    justify-items:center;
+}
+
+#nameInput{
+    width:90%;
+    margin-left: 5%;
+}
+
+#ing{
+    width:90%;
+    justify-items:center;
+}
+
+#ingredients{
+    width:90%;
+    margin-left: 5%;
+}
+
+#ins{
+    width:90%;
+    justify-items:center;
+}
+
+#instructions{
+    width:90%;
+    height:70%;
+    margin-left: 5%;
+}
+
+#btn{
+    margin-top: 30px;
+    height:40%;
+    width:30%;
+    background-color: rgb(135, 89, 198);
+}
+
+#dropZone{
+    margin-top: 20px;
 }
