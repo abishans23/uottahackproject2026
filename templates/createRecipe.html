@@ -1,40 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href = "../static/styles/create.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/styles/create.css" />
     <title>Create</title>
-</head>
-<body>
+  </head>
+  <body>
+    <navbar>
+      <div>
+        <h1>Yumly</h1>
+      </div>
+      <div>
+        <button id="library" type="button">
+          <a href="{{ url_for('recipes') }}">Recipes</a>
+        </button>
+        <button id="library" type="button">
+          <a href="{{ url_for('create') }}">Create Recipe</a>
+        </button>
+        <button id="logout" type="button">
+          <a href="{{ url_for('logout') }}">Log Out</a>
+        </button>
+      </div>
+    </navbar>
     <div id="inside">
-        <h1>Create Recipe</h1>
-        <div id="name">
-            <h4>Name of the Recipe</h4>
-            <input id = "nameInput">
-        </div>
-        
-        <div id = "ing">
-            <h4>Ingredients</h4>
-            <input id = "ingredients">
-        </div>
-        
-        <div id="ins">
-            <h4>Instructions</h4>
-            <textarea id = "instructions"></textarea>
-        </div>
-        
+      <h1>Create Recipe</h1>
+      <div id="name">
+        <h4>Name of the Recipe</h4>
+        <input id="nameInput" />
+      </div>
 
+      <div id="ing">
+        <h4>Ingredients</h4>
+        <input id="ingredients" />
+      </div>
 
-        <div id="dropZone" style="border: 2px dashed #ccc; padding: 20px;">
-            Drag and drop an image here
-        </div>
+      <div id="ins">
+        <h4>Instructions</h4>
+        <textarea id="instructions"></textarea>
+      </div>
 
-        <button id = "btn" type = "button" >Submit</button>
+      <div id="dropZone" style="border: 2px dashed #ccc; padding: 20px">
+        Drag and drop an image here
+      </div>
 
-
-        
+      <button id="btn" type="button">Submit</button>
     </div>
-    <script src = "../static/create.js"></script>
-</body>
+    <script src="../static/create.js"></script>
+  </body>
 </html>
